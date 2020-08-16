@@ -49,7 +49,10 @@ app.use(function(err, req, res, next) {
 });
 
 mongoose
-	.connect(config.get('db'), { useNewUrlParser: true, useUnifiedTopology: true })
+	.connect('mongodb+srv://kaza:kaza@cluster0.awsvw.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+	})
 	.then(() => console.log('Connected to Mongo....'))
 	.catch((error) => console.log(error.message));
 
