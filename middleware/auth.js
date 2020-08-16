@@ -7,6 +7,7 @@ async function auth(req, res, next) {
 	if (!token) return res.status(400).send('Token not provided.');
 	try {
 		let user = jwt.verify(token, config.get('jwtPrivateKey'));
+		//console.log(user);
 		req.user = await UserLog.findById({ _id: user._id });
 		// console.log(req.user);
 	} catch (err) {
