@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var { Invoice } = require('../../models/invoicesModel');
 const validateInvoice = require('../../middleware/validateInvoices');
-const auth = require('../../middleware/auth');
-const admin = require('../../middleware/admin');
 
 router.get('/', async (req, res) => {
 	const invent = await Invoice.find();
@@ -19,7 +17,7 @@ router.get('/detail/:id', async (req, res) => {
 	res.send(refine);
 });
 
-router.post('/post', async (req, res) => {
+router.post('/post', validateInvoice, async (req, res) => {
 	const postInventory = new Invoice({
 		salesman_id: req.body.salesman_id,
 		product_details: req.body.product_details,
@@ -30,7 +28,7 @@ router.post('/post', async (req, res) => {
 	return res.send(postInventory);
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', validateInvoice, async (req, res) => {
 	//update using mongodb generated id
 	var prod = await Invoice.findById(req.params.id);
 	prod.salesman_id = req.body.salesman_id;

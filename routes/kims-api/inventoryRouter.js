@@ -42,7 +42,7 @@ router.post('/post', validateInventory, async (req, res) => {
 	return res.send(postInventory);
 });
 
-router.put('/:id', validateInventory, async (req, res) => {
+router.put('/:id', auth, admin, validateInventory, async (req, res) => {
 	//update using mongodb generated id
 
 	// var prod = await Inventory.findById(req.params.id);
@@ -86,7 +86,7 @@ router.put('/qnty/:id', async (req, res) => {
 
 // delete using custom id
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, admin, async (req, res) => {
 	const del = await Inventory.deleteOne({ product_id: req.params.id }, function(err) {
 		if (err) console.log(err);
 		console.log('Successful deletion');

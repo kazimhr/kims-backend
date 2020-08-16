@@ -65,7 +65,7 @@ router.put('/credit/:id', async (req, res) => {
 	res.send(updated);
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, admin, validateSale, async (req, res) => {
 	const updated = await Sale.findOne({ salesman_id: req.params.id }, function(err, user) {
 		user.salesman_id = req.body.salesman_id;
 		user.salesman_name = req.body.salesman_name;
@@ -83,7 +83,7 @@ router.put('/:id', async (req, res) => {
 
 // delete using custom id
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, admin, async (req, res) => {
 	const del = await Sale.deleteOne({ salesman_id: req.params.id }, function(err) {
 		if (err) console.log(err);
 		console.log('Successful deletion');
