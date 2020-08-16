@@ -49,7 +49,7 @@ app.use(function(err, req, res, next) {
 });
 
 mongoose
-	.connect('mongodb+srv://kaza:kaza@cluster0.awsvw.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+	.connect('mongodb+srv://kaza:kaza@cluster0.awsvw.mongodb.net/kims?retryWrites=true&w=majority', {
 		useNewUrlParser: true,
 		useUnifiedTopology: true
 	})
